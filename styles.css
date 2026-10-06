@@ -182,6 +182,9 @@ textarea.field { resize: none; }
   transition: transform 0.2s;
 }
 .icon-btn:active { transform: scale(0.9); }
+.tb-avatar { box-sizing: border-box; width: 26px; height: 26px; min-width: 26px; min-height: 26px; max-width: 26px; max-height: 26px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid rgba(184, 137, 44, 0.45); background: rgba(184, 137, 44, 0.1); font-size: 9px; letter-spacing: 0.02em; color: #8a6414; font-family: "Cormorant Garamond", Georgia, serif; line-height: 1; }
+.tb-avatar svg { width: 16px; height: 16px; }
+.tb-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
 /* ---------- bottom nav ---------- */
 .bnav {
@@ -309,11 +312,17 @@ textarea.field { resize: none; }
 .pcard .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
 .pcard:active .pic img { transform: scale(1.06); }
 .pcard .veil { position: absolute; inset: 0; background: linear-gradient(to top, rgba(11, 10, 8, 0.85), transparent 50%, rgba(11, 10, 8, 0.3)); }
-.pbadge { position: absolute; top: 8px; left: 8px; padding: 4px 8px; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; z-index: 2; }
+.pbadges { position: absolute; top: 8px; left: 8px; display: flex; flex-direction: column; gap: 5px; align-items: flex-start; z-index: 2; }
+.pbadge { padding: 4px 8px; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
 .pbadge.bestseller { background: linear-gradient(135deg, #e9d18a, #c9a227 55%, #9c7a1e); color: #161104; }
 .pbadge.new { border: 1px solid rgba(240, 217, 140, 0.6); background: rgba(28, 20, 10, 0.78); color: #f0d98c; backdrop-filter: blur(4px); }
 .pbadge.limited { border: 1px solid rgba(240, 217, 140, 0.4); background: rgba(28, 20, 10, 0.85); color: #f0d98c; backdrop-filter: blur(4px); }
 .pbadge.sale { background: #2c2113; color: #f4ead6; }
+.pbadge.sold-out { background: rgba(244, 236, 218, 0.95); color: #7d6f54; border: 1px solid rgba(59, 44, 28, 0.2); }
+.pbadge.exclusive { border: 1px solid rgba(184, 137, 44, 0.5); background: rgba(184, 137, 44, 0.14); color: #7a5c10; }
+.pbadge.back-soon { border: 1px solid rgba(59, 44, 28, 0.2); background: rgba(244, 236, 218, 0.9); color: var(--mute); }
+.pcard.sold-out .fit img { filter: grayscale(0.5) brightness(0.92); }
+.pcard.sold-out .padd { display: none; }
 .pwish {
   position: absolute;
   top: 8px;
@@ -454,7 +463,7 @@ textarea.field { resize: none; }
 .pd-hero .fit { position: absolute; inset: 0; }
 .pd-hero img { width: 100%; height: 100%; object-fit: cover; }
 .pd-hero .veil { position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 14, 6, 0.5), transparent 30%, rgba(20, 14, 6, 0.3)); }
-.pd-hero .pbadge { top: 12px; left: 12px; }
+.pd-hero .pbadges { top: 12px; left: 12px; }
 .pd-body { padding: 0 16px; }
 .pd-card { position: relative; margin-top: -28px; padding: 20px; }
 .pd-card h1 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 30px; line-height: 1.1; font-weight: 600; color: #2c2113; }
@@ -633,6 +642,7 @@ details.acc { border-bottom: 1px solid rgba(59, 44, 28, 0.1); }
 .profile h2 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 22px; font-weight: 500; color: #2c2113; }
 .profile .ph { font-size: 11px; color: var(--mute); margin-top: 2px; }
 .tier { margin-top: 6px; display: inline-block; border: 1px solid rgba(184, 137, 44, 0.45); background: rgba(184, 137, 44, 0.12); padding: 2px 8px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #7a5c10; }
+.tier.staff { border: none; background: linear-gradient(135deg, #e9d18a, #c9a227 55%, #9c7a1e); color: #161104; font-weight: 600; }
 .tier-track { margin-top: 16px; }
 .tier-track .lbls { display: flex; justify-content: space-between; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
 .track { margin-top: 6px; height: 4px; background: rgba(184, 137, 44, 0.2); }
@@ -774,6 +784,21 @@ details.acc { border-bottom: 1px solid rgba(59, 44, 28, 0.1); }
 .splash .word { font-family: "Jost", sans-serif; font-weight: 700; font-size: 30px; letter-spacing: 0.01em; color: #2c2113; margin-top: 24px; }
 .splash .est { margin-top: 8px; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: #7d6f54; }
 
+/* ---------- telegram login gate ---------- */
+.gate { z-index: 79; padding: 32px 28px; overflow-y: auto; background: radial-gradient(120% 90% at 50% 15%, #f6ecd2 0%, #ecdcb4 100%); }
+.gate-card { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 340px; width: 100%; }
+.gate-title { margin-top: 14px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 26px; line-height: 1.15; font-weight: 500; color: #2c2113; }
+.gate-user { margin-top: 22px; display: flex; align-items: center; gap: 14px; padding: 12px 16px; border: 1px solid rgba(184, 137, 44, 0.35); background: rgba(184, 137, 44, 0.08); width: 100%; text-align: left; }
+.gate-user .av { width: 48px; height: 48px; font-size: 17px; overflow: hidden; }
+.gate-user .av img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.gate-user h2 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 17px; font-weight: 500; color: #2c2113; }
+.gate-user .ph { font-size: 11px; color: var(--mute); margin-top: 2px; }
+.gate-msg { margin-top: 22px; font-size: 12.5px; line-height: 1.6; color: var(--mute); max-width: 280px; }
+.gate-btn { margin-top: 24px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.gate-btn svg { flex-shrink: 0; }
+.gate-btn[disabled] { opacity: 0.45; pointer-events: none; }
+.gate-foot { margin-top: 14px; font-size: 10.5px; letter-spacing: 0.05em; color: var(--mute); min-height: 13px; }
+
 /* ---------- animations ---------- */
 @keyframes shimmer { to { background-position: 200% center; } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -792,3 +817,21 @@ details.acc { border-bottom: 1px solid rgba(59, 44, 28, 0.1); }
 .fade-up { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .fade-in { animation: fadeIn 0.5s ease both; }
 .scale-in { animation: scaleIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ---------- admin (owner panel) ---------- */
+.admin-list { padding: 0 16px 24px; display: flex; flex-direction: column; gap: 10px; }
+.admin-row { display: flex; align-items: center; gap: 12px; padding: 10px; border: 1px solid rgba(184, 137, 44, 0.22); background: rgba(255, 255, 255, 0.35); }
+.admin-thumb { width: 48px; height: 48px; flex-shrink: 0; border-radius: 5px; overflow: hidden; background: #ecdcb4; }
+.admin-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.admin-info { flex: 1; min-width: 0; }
+.admin-info h4 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 14.5px; font-weight: 500; color: #2c2113; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.admin-info p { margin-top: 2px; font-size: 11px; color: var(--mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.admin-ico { width: 34px; height: 34px; flex-shrink: 0; display: grid; place-items: center; border: 1px solid rgba(184, 137, 44, 0.35); color: #7a5c10; background: transparent; }
+.admin-ico.danger { color: #b5503c; border-color: rgba(181, 80, 60, 0.35); }
+.admin-form .fld { margin-bottom: 14px; }
+.admin-form .fld-row { display: flex; gap: 12px; }
+.admin-form .fld-row .fld { flex: 1; margin-bottom: 14px; }
+.chk-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chk-pill { display: flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid rgba(184, 137, 44, 0.35); font-size: 11px; letter-spacing: 0.04em; color: var(--mute); cursor: pointer; }
+.chk-pill input { accent-color: var(--gold); }
+.chk-pill:has(input:checked) { color: #7a5c10; border-color: rgba(184, 137, 44, 0.7); background: rgba(184, 137, 44, 0.12); }
