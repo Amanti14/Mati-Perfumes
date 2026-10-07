@@ -514,7 +514,7 @@ var tg = window.Telegram && window.Telegram.WebApp;
    Owners get full billing + the "Owner" badge on their profile.
    Admins can also manage the collection, badged "Admin" instead.
    Get an ID from @userinfobot on Telegram, then add it below. */
-var OWNER_IDS = [];
+var OWNER_IDS = [5158823198];
 var ADMIN_IDS = [];
 function isOwner(){ return !!(tgUser && OWNER_IDS.indexOf(tgUser.id) !== -1); }
 function isAdmin(){ return !!(tgUser && ADMIN_IDS.indexOf(tgUser.id) !== -1); }
