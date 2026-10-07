@@ -835,3 +835,6 @@ details.acc { border-bottom: 1px solid rgba(59, 44, 28, 0.1); }
 .chk-pill { display: flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid rgba(184, 137, 44, 0.35); font-size: 11px; letter-spacing: 0.04em; color: var(--mute); cursor: pointer; }
 .chk-pill input { accent-color: var(--gold); }
 .chk-pill:has(input:checked) { color: #7a5c10; border-color: rgba(184, 137, 44, 0.7); background: rgba(184, 137, 44, 0.12); }
+
+/* ---------- brand logo (header / footer / splash / gate) ---------- */
+.brand-logo { display: block; border-radius: 15%; object-fit: cover; box-shadow: 0 1px 2px rgba(59, 44, 28, 0.25); }
